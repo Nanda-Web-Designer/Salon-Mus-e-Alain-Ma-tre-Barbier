@@ -5,145 +5,887 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Salon-Musée Alain Maître Barbier – Barbier historique Paris 3e</title>
   <meta name="description" content="Salon-Musée Alain Maître Barbier Coiffeur. Un salon de coiffure unique au cœur du Marais, à Paris 3e. Coupe, rasage traditionnel et exposition d'objets de barbier." />
+
+  <!-- ===== FAVICON ===== -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231A0F0A'/%3E%3Ctext x='16' y='20' text-anchor='middle' font-family='Georgia,serif' font-size='10' fill='%23D4A373' font-weight='700'%3EA%3C/text%3E%3Ctext x='16' y='30' text-anchor='middle' font-family='Georgia,serif' font-size='5' fill='%238B5A2B'%3EBARBIER%3C/text%3E%3C/svg%3E" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    :root{--noir:#1A0F0A;--cuir:#8B5A2B;--vieux-papier:#F4EDE4;--rouge-brique:#9C3A2A;--gris-fonce:#2A201A;--gris-clair:#B5A898;--dorure:#D4A373}
-    html{scroll-behavior:smooth}
-    body{font-family:'Inter',sans-serif;background:var(--vieux-papier);color:var(--noir);overflow-x:hidden;line-height:1.6}
-    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.5}
-    .scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--rouge-brique);z-index:999;width:0%;transition:width 0.08s linear;border-radius:0 2px 2px 0}
-    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.8rem 2rem;background:rgba(26,15,10,0.94);backdrop-filter:blur(8px);border-bottom:1px solid rgba(139,90,43,0.25)}
-    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-    .nav-logo-text{display:flex;flex-direction:column;line-height:1.1}
-    .nav-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--vieux-papier);letter-spacing:1px}
-    .nav-sub{font-size:0.55rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--gris-clair)}
-    .nav-links{display:flex;gap:0.2rem;list-style:none}
-    .nav-links a{text-decoration:none;color:var(--gris-clair);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;padding:0.4rem 0.9rem;border-radius:2px;transition:all 0.25s;font-weight:500}
-    .nav-links a:hover{color:var(--vieux-papier);background:rgba(139,90,43,0.15)}
-    .nav-cta{background:var(--dorure);color:var(--noir);padding:0.45rem 1.2rem;border-radius:2px;font-size:0.7rem;font-weight:600;text-decoration:none;text-transform:uppercase;letter-spacing:0.08em;transition:background 0.25s;white-space:nowrap}
-    .nav-cta:hover{background:var(--rouge-brique);color:var(--vieux-papier)}
-    @media(max-width:768px){.nav-links{display:none}nav{padding:0.6rem 1rem}}
-    .hero{min-height:92vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:2rem 2.5rem 4rem;gap:3rem;position:relative;background:linear-gradient(135deg,var(--vieux-papier) 0%,#E8DCD0 100%);border-bottom:1px solid rgba(139,90,43,0.2)}
-    .hero::after{content:'';position:absolute;bottom:0;left:10%;width:80%;height:1px;background:linear-gradient(90deg,transparent,var(--cuir),transparent)}
-    .hero-content{display:flex;flex-direction:column;gap:1.5rem}
-    .hero-badge{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--cuir);border:1px solid rgba(139,90,43,0.3);padding:0.3rem 1rem;width:fit-content;border-radius:2px;font-weight:600;background:rgba(255,255,255,0.4)}
-    .hero-badge::before{content:'✦';color:var(--rouge-brique);font-size:0.7rem}
-    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,5.2rem);font-weight:600;line-height:0.95;letter-spacing:-0.01em;color:var(--noir)}
-    .hero h1 span{color:var(--cuir);display:block;font-weight:400;font-style:italic;letter-spacing:2px;font-size:0.7em;margin-top:0.2rem}
-    .hero-desc{font-size:0.92rem;color:var(--gris-fonce);line-height:1.8;max-width:440px;font-weight:300;border-left:2px solid var(--cuir);padding-left:1.2rem;opacity:0.8}
-    .hero-tel{display:flex;align-items:center;gap:1rem;padding:0.8rem 1.4rem;border:1px solid rgba(139,90,43,0.3);border-radius:2px;text-decoration:none;color:var(--noir);width:fit-content;transition:all 0.3s;background:rgba(255,255,255,0.5)}
-    .hero-tel:hover{border-color:var(--cuir);background:rgba(255,255,255,0.8)}
-    .hero-tel .tel-num{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;letter-spacing:1px;color:var(--noir)}
-    .hero-tel .tel-label{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--gris-fonce)}
-    .hero-buttons{display:flex;gap:0.8rem;flex-wrap:wrap;margin-top:0.5rem}
-    .btn-primary{background:var(--cuir);color:var(--vieux-papier);padding:0.7rem 1.8rem;border-radius:2px;font-weight:700;text-decoration:none;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;transition:all 0.25s;display:inline-block;border:none;cursor:pointer}
-    .btn-primary:hover{background:var(--rouge-brique);color:var(--vieux-papier);transform:translateY(-2px)}
-    .btn-outline{border:1px solid rgba(139,90,43,0.4);color:var(--noir);padding:0.7rem 1.8rem;border-radius:2px;font-weight:500;text-decoration:none;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;transition:all 0.25s;display:inline-block}
-    .btn-outline:hover{border-color:var(--cuir);background:rgba(139,90,43,0.08)}
-    .hero-visual{display:flex;flex-direction:column;gap:8px;position:relative}
-    .hero-visual .main-photo{width:100%;aspect-ratio:1/1.1;border-radius:4px;border:1px solid rgba(139,90,43,0.2);overflow:hidden;background:var(--gris-fonce);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--vieux-papier);letter-spacing:4px;text-align:center;padding:1.5rem;background:linear-gradient(145deg,#2A201A,#1A0F0A);position:relative}
-    .hero-visual .main-photo svg{width:50%;height:50%;opacity:0.10;position:absolute}
-    .hero-visual .main-photo .text-overlay{position:relative;z-index:2;text-shadow:0 2px 12px rgba(0,0,0,0.6)}
-    .hero-visual .secondary-svg{height:80px;border-radius:4px;border:1px solid rgba(139,90,43,0.15);display:flex;align-items:center;justify-content:center;gap:2rem;background:rgba(255,255,255,0.5);color:var(--gris-fonce);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em}
-    .hero-visual .secondary-svg span{display:flex;align-items:center;gap:0.4rem}
-    @media(max-width:900px){.hero{grid-template-columns:1fr;padding:2rem 1.5rem 3rem;min-height:auto}.hero-visual .main-photo{aspect-ratio:1/0.8}}
-    .strip{background:var(--noir);padding:0.8rem 2rem;display:flex;justify-content:center;align-items:center;gap:2rem;flex-wrap:wrap;border-bottom:1px solid rgba(139,90,43,0.2);border-top:1px solid rgba(139,90,43,0.2)}
-    .strip span{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris-clair);display:flex;align-items:center;gap:0.5rem}
-    .strip span::before{content:'◆';color:var(--dorure);font-size:0.5rem}
-    .section-wrap{max-width:1100px;margin:0 auto;padding:4rem 2rem}
-    .eyebrow{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--cuir);display:flex;align-items:center;gap:0.6rem;margin-bottom:0.6rem}
-    .eyebrow::before{content:'';width:28px;height:1.5px;background:var(--cuir)}
-    .section-title{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:500;line-height:1.05;letter-spacing:0.5px;margin-bottom:0.5rem}
-    .section-title span{color:var(--cuir);font-style:italic}
-    .section-sub{font-size:0.88rem;color:var(--gris-fonce);font-weight:300;line-height:1.7;max-width:560px;opacity:0.8}
-    .rule{width:40px;height:2px;background:var(--rouge-brique);margin:1.2rem 0 2.5rem}
-    .services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(139,90,43,0.15);border-radius:4px;overflow:hidden;margin-top:2rem}
-    .service-card{background:var(--vieux-papier);padding:2rem 1.2rem;text-align:center;transition:background 0.3s;border-right:1px solid rgba(139,90,43,0.08)}
-    .service-card:last-child{border-right:none}
-    .service-card:hover{background:#E8DCD0}
-    .service-icon{font-size:2.2rem;display:block;margin-bottom:0.6rem}
-    .service-card h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:0.06em;margin-bottom:0.3rem}
-    .service-card p{font-size:0.75rem;color:var(--gris-fonce);line-height:1.6;opacity:0.7}
-    @media(max-width:768px){.services-grid{grid-template-columns:1fr 1fr}.service-card{border-right:none;border-bottom:1px solid rgba(139,90,43,0.08)}}
-    @media(max-width:480px){.services-grid{grid-template-columns:1fr}}
-    .musee-section{background:var(--noir);color:var(--vieux-papier)}
-    .musee-section .section-title{color:var(--vieux-papier)}
-    .musee-section .section-title span{color:var(--dorure)}
-    .musee-section .section-sub{color:var(--gris-clair)}
-    .musee-section .rule{background:var(--dorure)}
-    .musee-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem}
-    .musee-item{background:rgba(255,255,255,0.04);border:1px solid rgba(139,90,43,0.12);border-radius:4px;padding:1.8rem 1.2rem;text-align:center;transition:border-color 0.3s}
-    .musee-item:hover{border-color:var(--dorure)}
-    .musee-item .icon{font-size:2.4rem;display:block;margin-bottom:0.6rem}
-    .musee-item h4{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:0.06em;margin-bottom:0.3rem}
-    .musee-item p{font-size:0.75rem;color:var(--gris-clair);line-height:1.6}
-    @media(max-width:768px){.musee-grid{grid-template-columns:1fr 1fr}}
-    @media(max-width:480px){.musee-grid{grid-template-columns:1fr}}
-    .tarifs-box{background:var(--vieux-papier);border:1px solid rgba(139,90,43,0.15);border-radius:4px;padding:2.5rem;text-align:center;margin-top:2rem}
-    .tarifs-box p{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:500;color:var(--cuir)}
-    .tarifs-box .sub{font-size:0.85rem;color:var(--gris-fonce);opacity:0.6;margin-top:0.5rem}
-    .avis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem}
-    .avis-card{background:var(--vieux-papier);border:1px solid rgba(139,90,43,0.1);border-radius:4px;padding:1.8rem;transition:border-color 0.3s}
-    .avis-card:hover{border-color:var(--cuir)}
-    .avis-stars{color:var(--dorure);font-size:0.85rem;letter-spacing:2px;margin-bottom:0.8rem}
-    .avis-card blockquote{font-family:'Cormorant Garamond',serif;font-size:0.98rem;font-style:italic;color:var(--noir);line-height:1.7;margin-bottom:1rem}
-    .avis-author{display:flex;align-items:center;gap:0.6rem}
-    .avis-initials{width:32px;height:32px;border-radius:50%;background:var(--cuir);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.7rem;color:var(--vieux-papier);flex-shrink:0}
-    .avis-name{font-weight:600;font-size:0.8rem}
-    .avis-loc{font-size:0.65rem;color:var(--gris-fonce);opacity:0.6}
-    @media(max-width:768px){.avis-grid{grid-template-columns:1fr}}
-    .contact-section{background:var(--noir);color:var(--vieux-papier)}
-    .contact-section .section-title{color:var(--vieux-papier)}
-    .contact-section .section-title span{color:var(--dorure)}
-    .contact-section .section-sub{color:var(--gris-clair)}
-    .contact-section .rule{background:var(--dorure)}
-    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2rem}
-    .contact-infos{display:flex;flex-direction:column;gap:0.8rem}
-    .contact-item{display:flex;align-items:center;gap:0.8rem;padding:0.8rem 1rem;border:1px solid rgba(139,90,43,0.12);border-radius:3px;text-decoration:none;color:var(--vieux-papier);transition:border-color 0.25s}
-    .contact-item:hover{border-color:var(--dorure)}
-    .contact-item .icon{font-size:1.1rem;flex-shrink:0;color:var(--dorure)}
-    .contact-item .label{font-size:0.55rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris-clair);display:block}
-    .contact-item .value{font-weight:500;font-size:0.9rem}
-    .contact-form{background:rgba(255,255,255,0.04);border:1px solid rgba(139,90,43,0.12);border-radius:4px;padding:2rem}
-    .form-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;letter-spacing:1px;margin-bottom:1.5rem}
-    .form-group{margin-bottom:1rem;display:flex;flex-direction:column;gap:0.3rem}
-    .form-group label{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--gris-clair)}
-    .form-group input,.form-group select,.form-group textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(139,90,43,0.15);border-radius:3px;padding:0.7rem 0.9rem;font-size:0.85rem;font-family:'Inter',sans-serif;color:var(--vieux-papier);outline:none;transition:border-color 0.25s}
-    .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.15)}
-    .form-group select option{background:var(--noir);color:var(--vieux-papier)}
-    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--dorure)}
-    .form-group textarea{min-height:80px;resize:vertical}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    .form-submit{background:var(--dorure);color:var(--noir);border:none;padding:0.8rem;border-radius:3px;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;transition:background 0.25s;font-family:'Inter',sans-serif;width:100%}
-    .form-submit:hover{background:var(--rouge-brique);color:var(--vieux-papier)}
-    .form-success{display:none;background:rgba(139,90,43,0.12);border:1px solid var(--dorure);border-radius:3px;padding:0.8rem;font-size:0.82rem;color:var(--dorure);text-align:center;margin-top:1rem}
-    @media(max-width:768px){.contact-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
-    footer{background:var(--noir);padding:2rem 2rem;border-top:1px solid rgba(139,90,43,0.08)}
-    .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-    footer p{font-size:0.65rem;color:rgba(255,255,255,0.15)}
-    footer span{color:rgba(255,255,255,0.4)}
-    .footer-links{display:flex;gap:1.2rem}
-    .footer-links a{color:rgba(255,255,255,0.15);font-size:0.65rem;text-decoration:none;text-transform:uppercase;letter-spacing:0.06em;transition:color 0.2s}
-    .footer-links a:hover{color:var(--dorure)}
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
-    .reveal.in{opacity:1;transform:translateY(0)}
-    .reveal-l{opacity:0;transform:translateX(-24px);transition:opacity 0.7s ease,transform 0.7s ease}
-    .reveal-l.in{opacity:1;transform:translateX(0)}
-    .reveal-r{opacity:0;transform:translateX(24px);transition:opacity 0.7s ease,transform 0.7s ease}
-    .reveal-r.in{opacity:1;transform:translateX(0)}
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --noir: #1A0F0A;
+      --cuir: #8B5A2B;
+      --vieux-papier: #F4EDE4;
+      --rouge-brique: #9C3A2A;
+      --gris-fonce: #2A201A;
+      --gris-clair: #B5A898;
+      --dorure: #D4A373;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--vieux-papier);
+      color: var(--noir);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.5;
+    }
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--rouge-brique);
+      z-index: 999;
+      width: 0%;
+      transition: width 0.08s linear;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 2rem;
+      background: rgba(26, 15, 10, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(139, 90, 43, 0.2);
+    }
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--vieux-papier);
+      letter-spacing: 1px;
+    }
+    .nav-sub {
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gris-clair);
+    }
+    .nav-links {
+      display: flex;
+      gap: 0.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gris-clair);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.4rem 0.9rem;
+      border-radius: 2px;
+      transition: all 0.25s;
+      font-weight: 500;
+    }
+    .nav-links a:hover {
+      color: var(--vieux-papier);
+      background: rgba(139, 90, 43, 0.15);
+    }
+    .nav-cta {
+      background: var(--dorure);
+      color: var(--noir);
+      padding: 0.45rem 1.2rem;
+      border-radius: 2px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: background 0.25s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover {
+      background: var(--rouge-brique);
+      color: var(--vieux-papier);
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      nav {
+        padding: 0.6rem 1rem;
+      }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 2rem 2.5rem 4rem;
+      gap: 3rem;
+      background: linear-gradient(135deg, var(--vieux-papier) 0%, #E8DCD0 100%);
+      border-bottom: 1px solid rgba(139, 90, 43, 0.15);
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--cuir);
+      border: 1px solid rgba(139, 90, 43, 0.2);
+      padding: 0.3rem 1rem;
+      width: fit-content;
+      border-radius: 2px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .hero-badge::before {
+      content: '✦';
+      color: var(--rouge-brique);
+      font-size: 0.7rem;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5.5vw, 5.2rem);
+      font-weight: 600;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      color: var(--noir);
+    }
+    .hero h1 span {
+      color: var(--cuir);
+      display: block;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: 2px;
+      font-size: 0.7em;
+      margin-top: 0.2rem;
+    }
+    .hero-desc {
+      font-size: 0.92rem;
+      color: var(--gris-fonce);
+      line-height: 1.8;
+      max-width: 440px;
+      font-weight: 300;
+      border-left: 2px solid var(--cuir);
+      padding-left: 1.2rem;
+      opacity: 0.8;
+    }
+    .hero-tel {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 1.4rem;
+      border: 1px solid rgba(139, 90, 43, 0.2);
+      border-radius: 2px;
+      text-decoration: none;
+      color: var(--noir);
+      width: fit-content;
+      transition: all 0.3s;
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .hero-tel:hover {
+      border-color: var(--cuir);
+      background: rgba(255, 255, 255, 0.8);
+    }
+    .hero-tel .tel-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--noir);
+    }
+    .hero-tel .tel-label {
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gris-fonce);
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .btn-primary {
+      background: var(--cuir);
+      color: var(--vieux-papier);
+      padding: 0.7rem 1.8rem;
+      border-radius: 2px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: all 0.25s;
+      display: inline-block;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--rouge-brique);
+      color: var(--vieux-papier);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      border: 1px solid rgba(139, 90, 43, 0.3);
+      color: var(--noir);
+      padding: 0.7rem 1.8rem;
+      border-radius: 2px;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: all 0.25s;
+      display: inline-block;
+    }
+    .btn-outline:hover {
+      border-color: var(--cuir);
+      background: rgba(139, 90, 43, 0.06);
+    }
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hero-visual .main-svg {
+      width: 100%;
+      aspect-ratio: 1/1.1;
+      border-radius: 4px;
+      border: 1px solid rgba(139, 90, 43, 0.15);
+      background: var(--gris-fonce);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 1.5rem;
+    }
+    .hero-visual .main-svg svg {
+      width: 50%;
+      height: 50%;
+      opacity: 0.08;
+      position: absolute;
+    }
+    .hero-visual .main-svg .text-overlay {
+      position: relative;
+      z-index: 2;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--vieux-papier);
+      letter-spacing: 4px;
+      text-align: center;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    }
+    .hero-visual .main-svg .text-overlay small {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      color: var(--dorure);
+    }
+    .hero-visual .secondary-bar {
+      height: 70px;
+      border-radius: 4px;
+      border: 1px solid rgba(139, 90, 43, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--gris-fonce);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .hero-visual .secondary-bar span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 2rem 1.5rem 3rem;
+        min-height: auto;
+      }
+      .hero-visual .main-svg {
+        aspect-ratio: 1/0.8;
+      }
+    }
+
+    /* ===== STRIP ===== */
+    .strip {
+      background: var(--noir);
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(139, 90, 43, 0.15);
+      border-top: 1px solid rgba(139, 90, 43, 0.15);
+    }
+    .strip span {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gris-clair);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .strip span::before {
+      content: '◆';
+      color: var(--dorure);
+      font-size: 0.5rem;
+    }
+
+    /* ===== SECTIONS ===== */
+    .section-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .eyebrow {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cuir);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1.5px;
+      background: var(--cuir);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+    .section-title span {
+      color: var(--cuir);
+      font-style: italic;
+    }
+    .section-sub {
+      font-size: 0.88rem;
+      color: var(--gris-fonce);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 560px;
+      opacity: 0.8;
+    }
+    .rule {
+      width: 40px;
+      height: 2px;
+      background: var(--rouge-brique);
+      margin: 1.2rem 0 2.5rem;
+    }
+
+    /* ===== SERVICES ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(139, 90, 43, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .service-card {
+      background: var(--vieux-papier);
+      padding: 2rem 1.2rem;
+      text-align: center;
+      transition: background 0.3s;
+      border-right: 1px solid rgba(139, 90, 43, 0.05);
+    }
+    .service-card:last-child {
+      border-right: none;
+    }
+    .service-card:hover {
+      background: #E8DCD0;
+    }
+    .service-icon {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .service-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
+    .service-card p {
+      font-size: 0.75rem;
+      color: var(--gris-fonce);
+      line-height: 1.6;
+      opacity: 0.7;
+    }
+    @media (max-width: 768px) {
+      .services-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .service-card {
+        border-right: none;
+        border-bottom: 1px solid rgba(139, 90, 43, 0.05);
+      }
+    }
+    @media (max-width: 480px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== MUSÉE ===== */
+    .musee-section {
+      background: var(--noir);
+      color: var(--vieux-papier);
+    }
+    .musee-section .section-title {
+      color: var(--vieux-papier);
+    }
+    .musee-section .section-title span {
+      color: var(--dorure);
+    }
+    .musee-section .section-sub {
+      color: var(--gris-clair);
+    }
+    .musee-section .rule {
+      background: var(--dorure);
+    }
+    .musee-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    .musee-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(139, 90, 43, 0.1);
+      border-radius: 4px;
+      padding: 1.8rem 1.2rem;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+    .musee-item:hover {
+      border-color: var(--dorure);
+    }
+    .musee-item .icon {
+      font-size: 2.4rem;
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .musee-item h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
+    .musee-item p {
+      font-size: 0.75rem;
+      color: var(--gris-clair);
+      line-height: 1.6;
+    }
+    @media (max-width: 768px) {
+      .musee-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 480px) {
+      .musee-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== TARIFS (sur demande) ===== */
+    .tarifs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(139, 90, 43, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 2rem;
+      border: 1px solid rgba(139, 90, 43, 0.05);
+    }
+    .tarif-item {
+      background: var(--vieux-papier);
+      padding: 1.2rem 1rem;
+      text-align: center;
+      transition: background 0.25s;
+      border-right: 1px solid rgba(139, 90, 43, 0.04);
+      border-bottom: 1px solid rgba(139, 90, 43, 0.04);
+    }
+    .tarif-item:nth-child(3n) {
+      border-right: none;
+    }
+    .tarif-item:hover {
+      background: #E8DCD0;
+    }
+    .tarif-item .presta {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--noir);
+    }
+    .tarif-item .prix {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--cuir);
+      margin-top: 0.2rem;
+      font-style: italic;
+    }
+    .source-note {
+      font-size: 0.6rem;
+      color: var(--gris-clair);
+      text-align: center;
+      margin-top: 1rem;
+      opacity: 0.5;
+    }
+    @media (max-width: 768px) {
+      .tarifs-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .tarif-item:nth-child(3n) {
+        border-right: 1px solid rgba(139, 90, 43, 0.04);
+      }
+      .tarif-item:nth-child(2n) {
+        border-right: none;
+      }
+    }
+    @media (max-width: 480px) {
+      .tarifs-grid {
+        grid-template-columns: 1fr;
+      }
+      .tarif-item {
+        border-right: none;
+      }
+    }
+
+    /* ===== AVIS ===== */
+    .avis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    .avis-card {
+      background: var(--vieux-papier);
+      border: 1px solid rgba(139, 90, 43, 0.08);
+      border-radius: 4px;
+      padding: 1.8rem;
+      transition: border-color 0.3s;
+    }
+    .avis-card:hover {
+      border-color: var(--cuir);
+    }
+    .avis-stars {
+      color: var(--dorure);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.8rem;
+    }
+    .avis-card blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.98rem;
+      font-style: italic;
+      color: var(--noir);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .avis-author {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .avis-initials {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--cuir);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.7rem;
+      color: var(--vieux-papier);
+      flex-shrink: 0;
+    }
+    .avis-name {
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    .avis-loc {
+      font-size: 0.65rem;
+      color: var(--gris-fonce);
+      opacity: 0.6;
+    }
+    @media (max-width: 768px) {
+      .avis-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-section {
+      background: var(--noir);
+      color: var(--vieux-papier);
+    }
+    .contact-section .section-title {
+      color: var(--vieux-papier);
+    }
+    .contact-section .section-title span {
+      color: var(--dorure);
+    }
+    .contact-section .section-sub {
+      color: var(--gris-clair);
+    }
+    .contact-section .rule {
+      background: var(--dorure);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+    .contact-infos {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 3px;
+      text-decoration: none;
+      color: var(--vieux-papier);
+      transition: border-color 0.25s;
+    }
+    .contact-item:hover {
+      border-color: var(--dorure);
+    }
+    .contact-item .icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      color: var(--dorure);
+    }
+    .contact-item .label {
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gris-clair);
+      display: block;
+    }
+    .contact-item .value {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .contact-form {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      padding: 2rem;
+    }
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .form-group label {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gris-clair);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 3px;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--vieux-papier);
+      outline: none;
+      transition: border-color 0.25s;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255, 255, 255, 0.12);
+    }
+    .form-group select option {
+      background: var(--noir);
+      color: var(--vieux-papier);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--dorure);
+    }
+    .form-group textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-submit {
+      background: var(--dorure);
+      color: var(--noir);
+      border: none;
+      padding: 0.8rem;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.25s;
+      font-family: 'Inter', sans-serif;
+      width: 100%;
+    }
+    .form-submit:hover {
+      background: var(--rouge-brique);
+      color: var(--vieux-papier);
+    }
+    .form-success {
+      display: none;
+      background: rgba(139, 90, 43, 0.1);
+      border: 1px solid var(--dorure);
+      border-radius: 3px;
+      padding: 0.8rem;
+      font-size: 0.82rem;
+      color: var(--dorure);
+      text-align: center;
+      margin-top: 1rem;
+    }
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--noir);
+      padding: 2rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer p {
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.12);
+    }
+    footer span {
+      color: rgba(255, 255, 255, 0.3);
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.2rem;
+    }
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.12);
+      font-size: 0.65rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--dorure);
+    }
+
+    /* ===== REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
+
+  <!-- ===== SCROLL PROGRESS ===== -->
   <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- ===== NAV ===== -->
   <nav>
     <a class="nav-logo" href="#">
-      <div class="nav-logo-text">
-        <span class="nav-name">Salon-Musée Alain</span>
-        <span class="nav-sub">Maître Barbier · Paris 3e</span>
-      </div>
+      <span class="nav-name">Salon-Musée Alain</span>
+      <span class="nav-sub">Maître Barbier · Paris 3e</span>
     </a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
@@ -155,11 +897,18 @@
     <a href="#contact" class="nav-cta">📞 Réserver</a>
   </nav>
 
+  <!-- ===== HERO ===== -->
   <section class="hero">
     <div class="hero-content">
       <div class="hero-badge">Salon-musée · Le Marais · Paris 3e</div>
-      <h1>Alain<br /><span>Maître Barbier</span></h1>
-      <p class="hero-desc">Un salon de coiffure unique au cœur du Marais, où l'art de la coupe et du rasage se mêle à une collection d'objets de barbier d'antan.</p>
+      <h1>
+        Alain<br />
+        <span>Maître Barbier</span>
+      </h1>
+      <p class="hero-desc">
+        Un salon de coiffure unique au cœur du Marais, où l'art de la coupe et du rasage
+        se mêle à une collection d'objets de barbier d'antan.
+      </p>
       <a href="tel:+33142775580" class="hero-tel">
         <span class="tel-num">01 42 77 55 80</span>
         <span class="tel-label">Appelez pour réserver</span>
@@ -170,8 +919,8 @@
       </div>
     </div>
     <div class="hero-visual">
-      <div class="main-photo">
-        <svg viewBox="0 0 200 200" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1">
+      <div class="main-svg">
+        <svg viewBox="0 0 200 200" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1">
           <circle cx="100" cy="70" r="35" />
           <path d="M70 115 L55 170 L80 160 L90 180 L110 180 L120 160 L145 170 L130 115 Z" />
           <path d="M85 140 L92 160 L100 140" />
@@ -179,9 +928,12 @@
           <circle cx="80" cy="50" r="3" />
           <circle cx="120" cy="50" r="3" />
         </svg>
-        <div class="text-overlay">Salon-Musée<br />Alain Maître Barbier</div>
+        <div class="text-overlay">
+          Salon-Musée Alain
+          <small>Maître Barbier</small>
+        </div>
       </div>
-      <div class="secondary-svg">
+      <div class="secondary-bar">
         <span>✂️ Coupe</span>
         <span>🪒 Rasage</span>
         <span>🧔 Barbe</span>
@@ -190,51 +942,89 @@
     </div>
   </section>
 
+  <!-- ===== STRIP ===== -->
   <div class="strip">
-    <span>Mardi–Vendredi 9h15–19h</span>
-    <span>Samedi 9h15–18h</span>
+    <span>Mar–Ven 9h15–19h</span>
+    <span>Sam 9h15–18h</span>
     <span>Fermé lundi & dimanche</span>
     <span>Sur rendez-vous</span>
     <span>Salon-musée</span>
   </div>
 
+  <!-- ===== SERVICES ===== -->
   <section class="section-wrap" id="services">
     <div class="eyebrow reveal">Nos prestations</div>
     <h2 class="section-title reveal">Le savoir-faire <span>d'un maître</span></h2>
     <p class="section-sub reveal">Des techniques traditionnelles, un service personnalisé, une ambiance hors du temps.</p>
     <div class="rule reveal"></div>
     <div class="services-grid">
-      <div class="service-card reveal"><span class="service-icon">✂️</span><h3>Coupe homme</h3><p>Coupe classique, dégradé, tonte – une coupe nette et élégante.</p></div>
-      <div class="service-card reveal"><span class="service-icon">🪒</span><h3>Rasage à l'ancienne</h3><p>Serviette chaude, mousse au blaireau, rasoir de sûreté – un rituel.</p></div>
-      <div class="service-card reveal"><span class="service-icon">🧔</span><h3>Barbe & entretien</h3><p>Taille, dessin, entretien – on redessine votre barbe avec précision.</p></div>
-      <div class="service-card reveal"><span class="service-icon">🎩</span><h3>Service personnalisé</h3><p>Conseil, soin, prestations sur mesure – on prend le temps.</p></div>
+      <div class="service-card reveal">
+        <span class="service-icon">✂️</span>
+        <h3>Coupe homme</h3>
+        <p>Coupe classique, dégradé, tonte – une coupe nette et élégante.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">🪒</span>
+        <h3>Rasage à l'ancienne</h3>
+        <p>Serviette chaude, mousse au blaireau, rasoir de sûreté – un rituel.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">🧔</span>
+        <h3>Barbe & entretien</h3>
+        <p>Taille, dessin, entretien – on redessine votre barbe avec précision.</p>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-icon">🎩</span>
+        <h3>Service personnalisé</h3>
+        <p>Conseil, soin, prestations sur mesure – on prend le temps.</p>
+      </div>
     </div>
   </section>
 
+  <!-- ===== MUSÉE ===== -->
   <section class="musee-section section-wrap" id="musee">
     <div class="eyebrow reveal" style="color:var(--dorure);">Un lieu unique</div>
     <h2 class="section-title reveal">Le <span>Musée</span> du Barbier</h2>
     <p class="section-sub reveal">Véritable plongée dans l'histoire de la coiffure, notre salon expose une collection unique d'objets d'antan.</p>
     <div class="rule reveal"></div>
     <div class="musee-grid">
-      <div class="musee-item reveal"><span class="icon">🪒</span><h4>Rasoirs anciens</h4><p>Une collection de rasoirs de sûreté et de coupe-choux du XIXe siècle.</p></div>
-      <div class="musee-item reveal"><span class="icon">✂️</span><h4>Ciseaux d'époque</h4><p>Des ciseaux de barbier en acier forgé, restaurés et exposés.</p></div>
-      <div class="musee-item reveal"><span class="icon">🪞</span><h4>Miroirs & fauteuils</h4><p>Des fauteuils et miroirs de barbier datant du début du XXe siècle.</p></div>
+      <div class="musee-item reveal">
+        <span class="icon">🪒</span>
+        <h4>Rasoirs anciens</h4>
+        <p>Une collection de rasoirs de sûreté et de coupe-choux du XIXe siècle.</p>
+      </div>
+      <div class="musee-item reveal">
+        <span class="icon">✂️</span>
+        <h4>Ciseaux d'époque</h4>
+        <p>Des ciseaux de barbier en acier forgé, restaurés et exposés.</p>
+      </div>
+      <div class="musee-item reveal">
+        <span class="icon">🪞</span>
+        <h4>Miroirs & fauteuils</h4>
+        <p>Des fauteuils et miroirs de barbier datant du début du XXe siècle.</p>
+      </div>
     </div>
   </section>
 
-  <section class="section-wrap" id="tarifs">
-    <div class="eyebrow reveal">Tarifs</div>
-    <h2 class="section-title reveal">Prestations <span>sur mesure</span></h2>
-    <p class="section-sub reveal">Chaque prestation est unique. Contactez-nous pour un devis personnalisé.</p>
+  <!-- ===== TARIFS (sur demande) ===== -->
+  <section class="section-wrap" id="tarifs" style="background:var(--vieux-papier);border-top:1px solid rgba(139,90,43,0.05);border-bottom:1px solid rgba(139,90,43,0.05);">
+    <div class="eyebrow reveal">Nos prix</div>
+    <h2 class="section-title reveal">Tarifs <span>sur demande</span></h2>
+    <p class="section-sub reveal">Les tarifs varient selon les prestations. Contactez-nous pour un devis personnalisé.</p>
     <div class="rule reveal"></div>
-    <div class="tarifs-box reveal">
-      <p>Sur devis</p>
-      <div class="sub">Nous consulter pour connaître nos tarifs selon votre prestation</div>
+    <div class="tarifs-grid">
+      <div class="tarif-item reveal"><span class="presta">Coupe homme</span><div class="prix">Nous consulter</div></div>
+      <div class="tarif-item reveal"><span class="presta">Rasage à l'ancienne</span><div class="prix">Nous consulter</div></div>
+      <div class="tarif-item reveal"><span class="presta">Barbe & entretien</span><div class="prix">Nous consulter</div></div>
+      <div class="tarif-item reveal"><span class="presta">Service personnalisé</span><div class="prix">Nous consulter</div></div>
+      <div class="tarif-item reveal"><span class="presta">Visite du musée</span><div class="prix">Nous consulter</div></div>
+      <div class="tarif-item reveal"><span class="presta">Prestation complète</span><div class="prix">Nous consulter</div></div>
     </div>
+    <p class="source-note">* Tarifs en fonction des soins – source : ParisJeTaime[reference:13]</p>
   </section>
 
-  <section class="section-wrap" id="avis" style="background:var(--vieux-papier);border-top:1px solid rgba(139,90,43,0.08);border-bottom:1px solid rgba(139,90,43,0.08);">
+  <!-- ===== AVIS ===== -->
+  <section class="section-wrap" id="avis" style="background:var(--vieux-papier);border-top:1px solid rgba(139,90,43,0.05);border-bottom:1px solid rgba(139,90,43,0.05);">
     <div class="eyebrow reveal">Ils parlent de nous</div>
     <h2 class="section-title reveal">Avis <span>clients</span></h2>
     <div class="rule reveal"></div>
@@ -242,21 +1032,40 @@
       <div class="avis-card reveal">
         <div class="avis-stars">★★★★★</div>
         <blockquote>"Un salon hors du commun. Alain est un véritable artiste, et le musée ajoute une dimension unique. Le rasage à l'ancienne est un pur moment de plaisir."</blockquote>
-        <div class="avis-author"><div class="avis-initials">PL</div><div><div class="avis-name">Philippe L.</div><div class="avis-loc">Paris 3e</div></div></div>
+        <div class="avis-author">
+          <div class="avis-initials">PL</div>
+          <div>
+            <div class="avis-name">Philippe L.</div>
+            <div class="avis-loc">Paris 3e</div>
+          </div>
+        </div>
       </div>
       <div class="avis-card reveal">
         <div class="avis-stars">★★★★★</div>
         <blockquote>"J'adore l'ambiance du lieu. C'est calme, authentique, et on sent la passion d'Alain pour son métier. La coupe est toujours parfaite."</blockquote>
-        <div class="avis-author"><div class="avis-initials">JB</div><div><div class="avis-name">Jean-Baptiste R.</div><div class="avis-loc">Le Marais</div></div></div>
+        <div class="avis-author">
+          <div class="avis-initials">JB</div>
+          <div>
+            <div class="avis-name">Jean-Baptiste R.</div>
+            <div class="avis-loc">Le Marais</div>
+          </div>
+        </div>
       </div>
       <div class="avis-card reveal">
         <div class="avis-stars">★★★★★</div>
         <blockquote>"Une pépite dans le Marais. Je suis venu pour une coupe et j'ai découvert un véritable musée. Alain est un maître dans son art. Je recommande."</blockquote>
-        <div class="avis-author"><div class="avis-initials">CB</div><div><div class="avis-name">Claire B.</div><div class="avis-loc">Paris 4e</div></div></div>
+        <div class="avis-author">
+          <div class="avis-initials">CB</div>
+          <div>
+            <div class="avis-name">Claire B.</div>
+            <div class="avis-loc">Paris 4e</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- ===== CONTACT ===== -->
   <section class="contact-section section-wrap" id="contact">
     <div class="eyebrow reveal" style="color:var(--dorure);">Prenez rendez-vous</div>
     <h2 class="section-title reveal">On se <span>rencontre ?</span></h2>
@@ -264,43 +1073,127 @@
     <div class="rule reveal"></div>
     <div class="contact-grid">
       <div class="contact-infos">
-        <a href="tel:+33142775580" class="contact-item"><span class="icon">📞</span><div><span class="label">Téléphone</span><span class="value">01 42 77 55 80</span></div></a>
-        <a href="mailto:alain_maitrebarbier@yahoo.fr" class="contact-item"><span class="icon">✉️</span><div><span class="label">Email</span><span class="value">alain_maitrebarbier@yahoo.fr</span></div></a>
-        <a href="https://maps.google.com/?q=8+Rue+Saint-Claude+75003+Paris" target="_blank" class="contact-item"><span class="icon">📍</span><div><span class="label">Adresse</span><span class="value">8 rue Saint-Claude, 75003 Paris</span></div></a>
-        <div class="contact-item" style="cursor:default;"><span class="icon">🕐</span><div><span class="label">Horaires</span><span class="value">Mar–Ven 9h15–19h · Sam 9h15–18h</span></div></div>
-        <div style="margin-top:0.5rem;padding:1rem;border:1px solid rgba(139,90,43,0.08);border-radius:3px;background:rgba(255,255,255,0.03);">
-          <p style="font-size:0.75rem;color:var(--gris-clair);line-height:1.6;"><strong style="color:var(--vieux-papier);">Alain Maître Barbier</strong> · Salon-musée depuis 1992<br />Collection d'objets de barbier · Paris 3e</p>
+        <a href="tel:+33142775580" class="contact-item">
+          <span class="icon">📞</span>
+          <div>
+            <span class="label">Téléphone</span>
+            <span class="value">01 42 77 55 80</span>
+          </div>
+        </a>
+        <a href="mailto:alain_maitrebarbier@yahoo.fr" class="contact-item">
+          <span class="icon">✉️</span>
+          <div>
+            <span class="label">Email</span>
+            <span class="value">alain_maitrebarbier@yahoo.fr</span>
+          </div>
+        </a>
+        <a href="https://maps.google.com/?q=8+Rue+Saint-Claude+75003+Paris" target="_blank" class="contact-item">
+          <span class="icon">📍</span>
+          <div>
+            <span class="label">Adresse</span>
+            <span class="value">8 rue Saint-Claude, 75003 Paris</span>
+          </div>
+        </a>
+        <div class="contact-item" style="cursor:default;">
+          <span class="icon">🕐</span>
+          <div>
+            <span class="label">Horaires</span>
+            <span class="value">Mar–Ven 9h15–19h · Sam 9h15–18h</span>
+          </div>
+        </div>
+        <div style="margin-top:0.5rem;padding:1rem;border:1px solid rgba(255,255,255,0.03);border-radius:3px;background:rgba(255,255,255,0.02);">
+          <p style="font-size:0.75rem;color:var(--gris-clair);line-height:1.6;">
+            <strong style="color:var(--vieux-papier);">Alain Maître Barbier</strong> · Salon-musée depuis 1992<br />
+            Collection d'objets de barbier · Paris 3e
+          </p>
         </div>
       </div>
       <div class="contact-form">
         <div class="form-title">Demande de rendez-vous</div>
-        <form id="contact-form-alain" action="https://formspree.io/f/xwvdpjka" method="POST">
-          <div class="form-row"><div class="form-group"><label>Prénom *</label><input type="text" name="prenom" placeholder="Votre prénom" required /></div><div class="form-group"><label>Nom *</label><input type="text" name="nom" placeholder="Votre nom" required /></div></div>
-          <div class="form-row"><div class="form-group"><label>Téléphone *</label><input type="tel" name="telephone" placeholder="06 XX XX XX XX" required /></div><div class="form-group"><label>Email</label><input type="email" name="email" placeholder="votre@email.fr" /></div></div>
-          <div class="form-group"><label>Prestation souhaitée *</label><select name="prestation" required><option value="">Choisissez...</option><option>Coupe homme</option><option>Rasage à l'ancienne</option><option>Barbe & entretien</option><option>Service personnalisé</option><option>Visite du musée</option><option>Autre</option></select></div>
-          <div class="form-group"><label>Message</label><textarea name="message" placeholder="Vos disponibilités ou précisions..."></textarea></div>
+        <form id="contact-form" action="https://formspree.io/f/xwvdpjqr" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom *</label>
+              <input type="text" name="prenom" placeholder="Votre prénom" required />
+            </div>
+            <div class="form-group">
+              <label>Nom *</label>
+              <input type="text" name="nom" placeholder="Votre nom" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Téléphone *</label>
+              <input type="tel" name="telephone" placeholder="06 XX XX XX XX" required />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="votre@email.fr" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Prestation souhaitée *</label>
+            <select name="prestation" required>
+              <option value="">Choisissez...</option>
+              <option>Coupe homme</option>
+              <option>Rasage à l'ancienne</option>
+              <option>Barbe & entretien</option>
+              <option>Service personnalisé</option>
+              <option>Visite du musée</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea name="message" placeholder="Vos disponibilités ou précisions..."></textarea>
+          </div>
           <button type="submit" class="form-submit">Envoyer la demande</button>
-          <div class="form-success" id="form-ok-alain">✅ Message envoyé ! Alain vous rappelle rapidement.</div>
+          <div class="form-success" id="form-ok">✅ Message envoyé ! Alain vous rappelle rapidement.</div>
         </form>
       </div>
     </div>
   </section>
 
+  <!-- ===== FOOTER ===== -->
   <footer>
     <div class="footer-inner">
       <p><span>Salon-Musée Alain Maître Barbier</span> · 8 rue Saint-Claude, 75003 Paris · 01 42 77 55 80</p>
-      <div class="footer-links"><a href="#services">Services</a><a href="#musee">Le Musée</a><a href="#tarifs">Tarifs</a><a href="#avis">Avis</a><a href="#contact">Contact</a></div>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#musee">Le Musée</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="#avis">Avis</a>
+        <a href="#contact">Contact</a>
+      </div>
       <p>© 2026 · Salon-Musée Alain Maître Barbier</p>
     </div>
   </footer>
 
+  <!-- ===== SCRIPTS ===== -->
   <script>
     'use strict';
+
     const progress = document.getElementById('scroll-progress');
-    window.addEventListener('scroll', function() { const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100; progress.style.width = Math.min(pct, 100) + '%'; }, { passive: true });
-    const observer = new IntersectionObserver(function(entries) { entries.forEach(function(e, i) { if (e.isIntersecting) { setTimeout(function() { e.target.classList.add('in'); }, i * 60); } }); }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(function(el) { observer.observe(el); });
-    const form = document.getElementById('contact-form-alain');
+    window.addEventListener('scroll', function() {
+      const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+      progress.style.width = Math.min(pct, 100) + '%';
+    }, { passive: true });
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e, i) {
+        if (e.isIntersecting) {
+          setTimeout(function() {
+            e.target.classList.add('in');
+          }, i * 60);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      observer.observe(el);
+    });
+
+    const form = document.getElementById('contact-form');
     if (form) {
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -308,10 +1201,23 @@
         btn.textContent = 'Envoi...';
         btn.disabled = true;
         try {
-          const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
-          if (res.ok) { document.getElementById('form-ok-alain').style.display = 'block'; form.reset(); btn.textContent = '✅ Envoyé !'; }
-          else { btn.textContent = 'Réessayer'; btn.disabled = false; }
-        } catch (_) { btn.textContent = 'Réessayer'; btn.disabled = false; }
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            document.getElementById('form-ok').style.display = 'block';
+            form.reset();
+            btn.textContent = '✅ Envoyé !';
+          } else {
+            btn.textContent = 'Réessayer';
+            btn.disabled = false;
+          }
+        } catch (_) {
+          btn.textContent = 'Réessayer';
+          btn.disabled = false;
+        }
       });
     }
   </script>
